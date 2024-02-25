@@ -1,0 +1,14 @@
+version: '1'
+services:
+  webapi:
+    build: ./WebApi
+    image: webapi
+    expose:
+      - "80"
+    ports:
+      - "5178:80"  
+  vite-project:
+    build: ./ClientApp
+    image: vite-project
+    ports:
+      - "80:80"
