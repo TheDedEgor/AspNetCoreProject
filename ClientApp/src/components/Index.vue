@@ -1,6 +1,7 @@
 <template>
-    <v-main class="flex align-items-center">
+    <v-main class="flex align-items-center justify-center">
         <v-window
+            v-if="!loading"
             v-model="window"
             class="window"
             show-arrows
@@ -28,6 +29,14 @@
                 </v-card>
             </v-window-item>
         </v-window>
+
+        <v-progress-circular
+            v-else
+            color="primary"
+            indeterminate="disable-shrink"
+            size="50"
+            width="50"
+        ></v-progress-circular>
     </v-main>
 </template>
 
@@ -37,6 +46,7 @@
     import type {FilmShortData} from "@/interfaces/FilmShortData";
 
     interface Data {
+        loading: boolean
         window: number
         pages: FilmShortData[][]
         films: FilmShortData[]
@@ -49,7 +59,8 @@
             return {
                 window: 0,
                 pages: [],
-                films: []
+                films: [],
+                loading: false
             }
         },
 
@@ -71,9 +82,15 @@
             },
 
             async getAllFilms() {
-                const response = await axios.get<FilmShortData[]>("/api/films");
-                this.films = response.data;
-                this.fillWindows();
+                try {
+                    this.loading = true;
+                    const response = await axios.get<FilmShortData[]>("/api/films");
+                    this.films = response.data;
+                    this.fillWindows();
+                }
+                finally {
+                    this.loading = false;
+                }
             },
 
             async searchFilms(text: string) {

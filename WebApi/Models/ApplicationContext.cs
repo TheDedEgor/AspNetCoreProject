@@ -20,7 +20,7 @@ public class ApplicationContext : DbContext
     {
         optionsBuilder
             .UseLazyLoadingProxies()
-            .UseSqlite("Data Source=webapi.db");
+            .UseSqlite("Data Source=./DB/webapi.db");
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)

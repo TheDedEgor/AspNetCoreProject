@@ -97,7 +97,7 @@
             this.$store.commit("updateUser", this.$cookies.get("user"));
             this.$store.commit("updateRole", this.$cookies.get("role"));
             axios.defaults.withCredentials = true;
-            axios.defaults.baseURL = 'http://localhost:5178';
+            axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
             axios.interceptors.response.use(null, (err) => {
                 const error = err as AxiosError<any>;
                 if (error.response!.status >= 500) {
