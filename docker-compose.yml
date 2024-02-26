@@ -1,14 +1,12 @@
-version: '1'
+version: '3.2'
 services:
   webapi:
     build: ./WebApi
-    image: webapi
-    expose:
-      - "80"
+    image: dedegor/webapi:latest
     ports:
       - "5178:80"  
   vite-project:
     build: ./ClientApp
-    image: vite-project
+    image: dedegor/clientapp:latest
     ports:
-      - "80:80"
+      - "80:3000"
