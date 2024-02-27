@@ -9,4 +9,4 @@ services:
     build: ./ClientApp
     image: dedegor/clientapp:latest
     ports:
-      - "80:3000"
+      - "80:80"
