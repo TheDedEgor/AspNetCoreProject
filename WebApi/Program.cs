@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme, options =>
 {
-    options.Cookie.SameSite = SameSiteMode.Strict;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -32,10 +32,11 @@ builder.Services.AddAuthorization();
 // Add my services
 builder.Services.AddScoped<ApplicationContext>();
 builder.Services.AddScoped<PasswordService>();
-builder.Services.AddScoped<IAuthService, AuthServiceService>();
-builder.Services.AddScoped<IFilmService, FilmServiceService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IFilmService, FilmService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
-builder.Services.AddScoped<IUserService, UserServiceService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 var app = builder.Build();
 

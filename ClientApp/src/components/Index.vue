@@ -72,6 +72,7 @@
                 else {
                     this.searchFilms(val);
                 }
+                this.window = 0;
             }
         },
 

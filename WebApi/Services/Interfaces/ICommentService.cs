@@ -8,6 +8,4 @@ public interface ICommentService
 {
     void AddComment(AddCommentRequest addCommentRequest, User user);
     IEnumerable<UserComment> GetCommentsByFilm(Film film);
-    IEnumerable<CommentResponse> GetAllComments();
-    void DeleteComment(int id);
 }

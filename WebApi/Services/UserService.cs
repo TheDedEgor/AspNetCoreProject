@@ -4,11 +4,11 @@ using WebApi.Services.Interfaces;
 
 namespace WebApi.Services;
 
-public class UserServiceService : IUserService
+public class UserService : IUserService
 {
     private readonly ApplicationContext _context;
 
-    public UserServiceService(ApplicationContext applicationContext)
+    public UserService(ApplicationContext applicationContext)
     {
         _context = applicationContext;
     }

@@ -9,6 +9,7 @@ namespace WebApi.Controllers;
 
 [ApiController]
 [Route("/api/comments/")]
+[Authorize]
 public class CommentController : ControllerBase
 {
     private readonly IUserService _userServiceService;
@@ -21,27 +22,11 @@ public class CommentController : ControllerBase
     }
     
     [HttpPost]
-    [Authorize]
     public IResult AddComment(AddCommentRequest addCommentRequest)
     {
         var email = HttpContext.User.Claims.First(claim => claim.Type == ClaimsIdentity.DefaultNameClaimType).Value;
         var user = _userServiceService.GetUser(email);
         _commentServiceService.AddComment(addCommentRequest, user);
-        return Results.Ok();
-    }
-    
-    [HttpGet]
-    [Authorize(Roles = "admin")]
-    public IEnumerable<CommentResponse> GetAllComments()
-    {
-        return _commentServiceService.GetAllComments();
-    }
-    
-    [HttpDelete]
-    [Authorize(Roles = "admin")]
-    public IResult DeleteComment(int id)
-    {
-        _commentServiceService.DeleteComment(id);
         return Results.Ok();
     }
 }

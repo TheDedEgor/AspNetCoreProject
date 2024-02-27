@@ -5,18 +5,18 @@ using WebApi.Services.Interfaces;
 
 namespace WebApi.Services;
 
-public class FilmServiceService : IFilmService
+public class FilmService : IFilmService
 {
     private readonly ICommentService _commentService;
     private readonly ApplicationContext _context;
     
-    public FilmServiceService(ApplicationContext applicationContext, ICommentService commentService)
+    public FilmService(ApplicationContext applicationContext, ICommentService commentService)
     {
         _context = applicationContext;
         _commentService = commentService;
     }
     
-    public IEnumerable<FilmShortDataResponse> GetAllFilms()
+    public IEnumerable<FilmShortDataResponse> GetAllFilmsShortData()
     {
         var films = _context.Films.ToList();
         var filmsResponse = films.Select(film =>
@@ -24,7 +24,7 @@ public class FilmServiceService : IFilmService
         return filmsResponse;
     }
 
-    public FilmResponse GetFilm(int id)
+    public FilmResponse GetFilmWithComments(int id)
     {
         var film = _context.Films.First(film => film.Id == id);
         var comments = _commentService.GetCommentsByFilm(film)

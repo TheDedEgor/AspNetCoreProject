@@ -27,20 +27,6 @@ public class CommentService : ICommentService
         _context.SaveChanges();
     }
     
-    public void DeleteComment(int id)
-    {
-        var userComment = _context.UserComments.First(uc => uc.Id == id);
-        _context.UserComments.Remove(userComment);
-        _context.SaveChanges();
-    }
-    
-    public IEnumerable<CommentResponse> GetAllComments()
-    {
-        return _context.UserComments
-            .Select(uc => new CommentResponse(uc.Id, uc.Film.Title, uc.User.FirstName + " " + uc.User.LastName, uc.Comment))
-            .ToList();
-    }
-    
     public IEnumerable<UserComment> GetCommentsByFilm(Film film)
     {
         return _context.UserComments.Where(uc => uc.Film == film).ToList();

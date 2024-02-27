@@ -5,12 +5,12 @@ using WebApi.Services.Interfaces;
 
 namespace WebApi.Services;
 
-public class AuthServiceService : IAuthService
+public class AuthService : IAuthService
 {
     private readonly ApplicationContext _context;
     private readonly PasswordService _passwordService;
     
-    public AuthServiceService(ApplicationContext applicationContext, PasswordService passwordService)
+    public AuthService(ApplicationContext applicationContext, PasswordService passwordService)
     {
         _context = applicationContext;
         _passwordService = passwordService;

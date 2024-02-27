@@ -58,6 +58,7 @@
                 no-resize
                 :loading="loading"
                 :error-messages="comment.errorMessage"
+                @keydown="keydownTextarea"
                 @click:append="addComment"
             ></v-textarea>
         </div>
@@ -119,14 +120,21 @@
                         await axios.post("/api/comments", data);
                         const id = Number(this.$route.params.id);
                         this.filmData = await this.getFilmData(id);
-                        this.comment.value = "";
                     }
                     finally {
+                        this.comment.value = "";
                         this.loading = false;
                     }
                 }
                 else {
                     this.comment.errorMessage = "Введите комментарий";
+                }
+            },
+
+            keydownTextarea(event: KeyboardEvent) {
+                if (!event.shiftKey && event.code == "Enter") {
+                    event.preventDefault();
+                    this.addComment();
                 }
             }
         },

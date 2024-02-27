@@ -17,16 +17,15 @@ public class FilmController : ControllerBase
     }
     
     [HttpGet]
-    public IEnumerable<FilmShortDataResponse> GetFilms()
+    public IEnumerable<FilmShortDataResponse> GetAllFilmsShortData()
     { 
-        return _filmServiceService.GetAllFilms();
+        return _filmServiceService.GetAllFilmsShortData();
     }
     
     [HttpGet("{id}")]
-    [Authorize]
-    public FilmResponse GetFilm(int id)
+    public FilmResponse GetFilmWithComments(int id)
     {
-        return _filmServiceService.GetFilm(id);
+        return _filmServiceService.GetFilmWithComments(id);
     }
     
     [HttpGet("search")]
